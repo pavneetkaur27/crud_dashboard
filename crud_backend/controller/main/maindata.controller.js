@@ -1,5 +1,6 @@
 const mongoose              = require('mongoose');
 const request 				= require('request');
+const bvalid                = require("bvalid");
 const mongo                 = require('../../services').Mongo;
 const to                    = require('../../services').Utility.to;
 const moment                = require('moment-timezone');
@@ -10,8 +11,6 @@ const errorCodes            = helper.Errors;
 const sendError 		    = httpResponse.sendError;
 const sendSuccess			= httpResponse.sendSuccess;
 
-// Models require
-const UserData = require('../../models/users');
 
 exports.modifyUser = async function(req,res,next){
     
@@ -27,10 +26,16 @@ exports.modifyUser = async function(req,res,next){
     
     var u_name  = req.body.u_name;   
     var e_mail  = req.body.e_mail;
-    var role    = req.body.role;
-    var stts    = req.body.stts;
+    var role    = parseInt(req.body.role);
+    var stts    = parseInt(req.body.stts);
     var user_id = req.body.user_id ?  req.body.user_id : null;
 
+    if(!bvalid.isEmail(e_mail)){
+        return sendError(res,req.validationErrors(),"invalid_email",constants.HTTP_STATUS.BAD_REQUEST);
+    }
+    if(!bvalid.isNumber(role) || !(bvalid.isNumber(stts))){
+        return sendError(res,req.validationErrors(),"invalid_parameters",constants.HTTP_STATUS.BAD_REQUEST);
+    }
     var obj = {
         u_name  : u_name,   
         e_mail  : e_mail,
