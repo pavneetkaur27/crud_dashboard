@@ -25,7 +25,7 @@ class AddUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            role    : this.props.edituserdata ? this.props.edituserdata.role : (ROLE_VALUE.ADMIN).toString(),
+            role    : this.props.edituserdata ? (this.props.edituserdata.role).toString() : (ROLE_VALUE.ADMIN).toString(),
             status  : this.props.edituserdata ? this.props.edituserdata.stts : 1,
             name    : this.props.edituserdata ? this.props.edituserdata.u_name : '',
             email   : this.props.edituserdata ? this.props.edituserdata.e_mail : ''

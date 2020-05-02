@@ -1,7 +1,7 @@
 const initialState = {
     loading     : false,
     sort_order  : 1,
-    searchval   : ''
+    searchval   : null
 }
 
 export default function (state = initialState, action) {
