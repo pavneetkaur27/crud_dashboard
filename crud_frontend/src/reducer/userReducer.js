@@ -19,6 +19,26 @@ export default function (state = initialState, action) {
             }
         }
 
+        case "SHOW_NOTIFY": {
+            return {
+                ...state,
+                data: {
+                    type: action.payload.type,
+                    show: true,
+                    message: action.payload.message
+                }
+            }
+        }
+
+        case "HIDE_NOTIFY": {
+            return {
+                ...state,
+                data: {
+                    show: false,
+                }
+            }
+        }
+
         case 'GET_ALL_USERS' : {
             return {...state,
                 usersdata : action.payload.usersdata
