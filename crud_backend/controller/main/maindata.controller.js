@@ -71,7 +71,7 @@ exports.fetchUsers = async function(req,res,next){
     }
 
     var sort_order = req.query.sort_order;
-    console.log(sort_order);
+    // console.log(sort_order);
     var [err1,getUserCount] = await to(mongo.Model('user').count({act : true}));
     if(err1){
         return sendError(res,err,"server_error",constants.HTTP_STATUS.SERVER_ERROR);
@@ -94,7 +94,7 @@ exports.fetchUsers = async function(req,res,next){
             }
         };
 
-        if(req.query.searchval && req.query.searchval != ''){
+        if(req.query.searchval && req.query.searchval != undefined && req.query.searchval != ''){
             query_string.u_name =  new RegExp('^' + req.query.searchval , 'i');
         }
         var projection  = {};
