@@ -31,10 +31,10 @@ exports.modifyUser = async function(req,res,next){
     var user_id = req.body.user_id ?  req.body.user_id : null;
 
     if(!bvalid.isEmail(e_mail)){
-        return sendError(res,req.validationErrors(),"invalid_email",constants.HTTP_STATUS.BAD_REQUEST);
+        return sendError(res,"invalid_email","invalid_email",constants.HTTP_STATUS.BAD_REQUEST);
     }
     if(!bvalid.isNumber(role) || !(bvalid.isNumber(stts))){
-        return sendError(res,req.validationErrors(),"invalid_parameters",constants.HTTP_STATUS.BAD_REQUEST);
+        return sendError(res,"invalid_parameters","invalid_parameters",constants.HTTP_STATUS.BAD_REQUEST);
     }
     var obj = {
         u_name  : u_name,   
@@ -57,12 +57,27 @@ exports.modifyUser = async function(req,res,next){
             return sendSuccess(res,{});
         }) 
     }else{
-        mongo.Model('user').insert(obj,function(err,saveddata){
-            if(err){
-                return sendError(res,"server_error","server_error");
-            }
-            return sendSuccess(res,{});
-        })    
+        var query_string = {
+            e_mail  : e_mail,
+            act     : true
+        }
+        var option      = {};
+        var projection  = {};
+    
+        var [err,user] = await to(mongo.Model('user').findOne(query_string, projection, option));
+        if(err){
+            return sendError(res,"server_error","server_error");
+        }
+        if(user){
+            return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
+        }else{
+            mongo.Model('user').insert(obj,function(err,saveddata){
+                if(err){
+                    return sendError(res,"server_error","server_error");
+                }
+                return sendSuccess(res,{});
+            }) 
+        }
     }
 }
 
