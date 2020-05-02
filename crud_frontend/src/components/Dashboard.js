@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
-import MainNavbar from './MainNavbar';
+import MainPage from './MainPage';
 import Loader from './shared/Loader';
 
 class Dashboard extends Component {
@@ -15,7 +15,7 @@ class Dashboard extends Component {
     return (
       <div className="main-body">
         <Loader loading={this.props.loading}/>
-        <MainNavbar />
+        <MainPage />
       </div>
     );
   }
@@ -23,7 +23,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-      loading: state.covidReducer.loading,
+      loading: state.userReducer.loading,
   }
 }
 

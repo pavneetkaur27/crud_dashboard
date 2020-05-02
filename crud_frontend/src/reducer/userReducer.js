@@ -1,5 +1,7 @@
 const initialState = {
-    loading : false
+    loading     : false,
+    sort_order  : 1,
+    searchval   : ''
 }
 
 export default function (state = initialState, action) {
@@ -17,18 +19,24 @@ export default function (state = initialState, action) {
             }
         }
 
-        case 'FETCH_COVID_COUNTRIES' : {
+        case 'GET_ALL_USERS' : {
             return {...state,
-                covidcountries : action.payload.covidcountries
+                usersdata : action.payload.usersdata
             }
         }
 
-        case 'FETCH_COVID_DATA' : {
+        case 'SET_SORT_ORDER' : {
             return {...state,
-                coviddata : action.payload.coviddata
+                sort_order : action.payload.sortorder
             }
         }
      
+        case 'SET_SEARCH_VALUE' : {
+            return {...state,
+                searchval : action.payload.searchval
+            }
+        }
+
         default:
             return state;
     }
