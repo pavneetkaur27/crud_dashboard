@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import { withRouter } from 'react-router-dom';
 import MainPage from './MainPage';
 import Loader from './shared/Loader';
+import Alert from './shared/Alert';
 
 class Dashboard extends Component {
   constructor(props){
@@ -14,6 +15,7 @@ class Dashboard extends Component {
   render(){
     return (
       <div className="main-body">
+         <Alert />
         <Loader loading={this.props.loading}/>
         <MainPage />
       </div>

@@ -9,7 +9,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Close from '@material-ui/icons/Close';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import {STATUS_VALUE, ROLE_VALUE,STATUS_VALUE_CONSTANT} from '../constants';
+import {STATUS_VALUE, ROLE_VALUE} from '../constants';
 import { createUser,getAllUsers} from '../actions/userAction';
 
 
@@ -85,14 +85,16 @@ class AddUser extends Component {
             data.user_id = this.props.edituserdata._id
         }
         this.props.createUser(data)
-            .then(res =>{
-                this.props.handleModalToggle(false);
-                this.props.getAllUsers({sort_order : this.props.userReducer.sort_order,searchval : this.props.userReducer.searchval});
+            .then(res =>{   
+                if(res && res.data && res.data.success){
+                    this.props.handleModalToggle(false);
+                    this.props.getAllUsers({sort_order : this.props.userReducer.sort_order,searchval : this.props.userReducer.searchval});
+                }
             });
     }
 
     render() {                                                                                  
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div className="modal-container">
                 <Dialog

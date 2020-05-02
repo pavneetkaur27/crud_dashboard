@@ -23,12 +23,14 @@ class AddItemModal extends Component {
         this.props.deleteUser(data)
             .then(res =>{
                 this.props.handleModalToggle(false);
-                this.props.getAllUsers({sort_order : this.props.userReducer.sort_order,searchval : this.props.userReducer.searchval});
+                if(res && res.data && res.data.success){
+                    this.props.getAllUsers({sort_order : this.props.userReducer.sort_order,searchval : this.props.userReducer.searchval});
+                }
             });
     }
 
     render() {                                                                                  
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div className="modal-container">
                 <Dialog
