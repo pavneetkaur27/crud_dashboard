@@ -76,6 +76,7 @@ Mongo.prototype.insert = function (c, cb) {
     let model = this.model(c);
     model.save(c, function (er, resp) {
       if (er) {
+        console.log(er);
         cb(er);
         return;
       }
@@ -161,6 +162,15 @@ Mongo.prototype.aggregation = function (q, cb) {
     this.model.aggregate([q], cb);
   } else {
     return this.model.aggregate([q]);
+  }
+}
+
+Mongo.prototype.count = function ( q, cb)
+{
+  if(isFunc(cb)){
+    this.model.countDocuments( q, cb );
+  } else {
+    return this.model.countDocuments( q );
   }
 }
 

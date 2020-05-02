@@ -1,3 +1,4 @@
 module.exports = {
-    'Mongo'             : require('./Mongo')
+    'Mongo'             : require('./mongo.service'),
+    'Utility'             : require('./util.service'),
 };

@@ -11,8 +11,13 @@ router.get('/',function(req, res, next) {
     res.send("user working");
 });
 
-// get covid affected countries
-router.post('/gt_users',dataController.maindata.fetchUsers);
+// get users
+router.get('/gt_users',dataController.maindata.fetchUsers);
 
+//add/update users
+router.post('/ad_usr',dataController.maindata.modifyUser);
+
+//remove user
+router.put('/rm_usr',dataController.maindata.removeUser);
 
 module.exports = router;

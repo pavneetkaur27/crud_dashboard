@@ -13,10 +13,15 @@ const server_debug                = require('debug')('Server');
 const utils                       = require('./utils');
 const compression                 = require('compression');
 const cors                        = require('cors')
+const expressValidator            = require('express-validator');
 
 const config                      = require('./config');
 const sConf                       = config.AppConfig.server;
 
+
+
+//validator
+app.use(expressValidator());
 
 //Security
 app.use(helmet());
@@ -26,6 +31,7 @@ app.use(compression());
 
 //Cors
 app.use(cors());
+
 
 /*----------------------Require route-----------------------*/
 const index                       = require('./routes/index');
