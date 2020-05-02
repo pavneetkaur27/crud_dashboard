@@ -1,16 +1,18 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 9000;
+const port = 7070;
 
 app.use(express.static('./build'));
 
 app.get('/', function (req, res) {
+  console.log("frontend started at port :"+ port);
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  console.log("frontend started at port :"+ port);
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
 app.listen(port);
