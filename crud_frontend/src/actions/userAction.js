@@ -10,6 +10,13 @@ const stopLoader = (dispatch)=>{
     return dispatch({ type: "STOP_LOADER" });
 }
 
+
+export const hideAlert =() => dispatch =>{
+  dispatch({
+    type: "HIDE_NOTIFY", payload: {}
+  });
+}
+
 export const setSortOrder = (data) => dispatch => {
  
   return dispatch({ 
@@ -46,18 +53,37 @@ export const createUser = (data) => dispatch => {
   
   return axios(requestObj).then((res) => {
     stopLoader(dispatch);
+    var msg = 'User Added Successfully'
+    if(data.user_id){
+      msg = 'User details Edited Successfully'
+    }
+    dispatch({
+      type: "SHOW_NOTIFY", payload: {
+        type: 'success',
+        message: msg,
+        dispatch: dispatch
+      }
+    });
+    return res;
   })
   .catch((err) => {
     var err_msg = "Something went wrong";
     if (err.response && err.response.statusText) {
       err_msg = err.response.statusText;
     }
-    if(err.response && err.response.data && err.response.data.message){
-      err_msg = err.response.data.message;
+    if(err.response && err.response.data && err.response.data.err){
+      err_msg = err.response.data.err;
     }
     
     stopLoader(dispatch);
     console.log(err_msg);
+    return dispatch({
+      type: "SHOW_NOTIFY", payload: {
+        type: 'error',
+        message: err_msg,
+        dispatch: dispatch
+      }
+    });
   })
 }
 
@@ -84,18 +110,25 @@ export const getAllUsers = (data) => dispatch => {
       }
       stopLoader(dispatch);
     })
-      .catch((err) => {
-        var err_msg = "Something went wrong";
-        if (err.response && err.response.statusText) {
-          err_msg = err.response.statusText;
+    .catch((err) => {
+      var err_msg = "Something went wrong";
+      if (err.response && err.response.statusText) {
+        err_msg = err.response.statusText;
+      }
+      if(err.response && err.response.data && err.response.data.err){
+        err_msg = err.response.data.err;
+      }
+      
+      stopLoader(dispatch);
+      console.log(err_msg);
+      return dispatch({
+        type: "SHOW_NOTIFY", payload: {
+          type: 'error',
+          message: err_msg,
+          dispatch: dispatch
         }
-        if(err.response && err.response.data && err.response.data.message){
-          err_msg = err.response.data.message;
-        }
-       
-        stopLoader(dispatch);
-        console.log(err_msg);
-      })
+      });
+    })
 }
 
 
@@ -111,18 +144,32 @@ export const deleteUser = (data) => dispatch => {
   
   return axios(requestObj).then((res) => {
     stopLoader(dispatch);
-    alert("User Deleted!");
+    dispatch({
+      type: "SHOW_NOTIFY", payload: {
+        type: 'success',
+        message: "User details Deleted Successfully!",
+        dispatch: dispatch
+      }
+    });
+    return res;
   })
   .catch((err) => {
     var err_msg = "Something went wrong";
     if (err.response && err.response.statusText) {
       err_msg = err.response.statusText;
     }
-    if(err.response && err.response.data && err.response.data.message){
-      err_msg = err.response.data.message;
+    if(err.response && err.response.data && err.response.data.err){
+      err_msg = err.response.data.err;
     }
     
     stopLoader(dispatch);
     console.log(err_msg);
+    return dispatch({
+      type: "SHOW_NOTIFY", payload: {
+        type: 'error',
+        message: err_msg,
+        dispatch: dispatch
+      }
+    });
   })
 }
