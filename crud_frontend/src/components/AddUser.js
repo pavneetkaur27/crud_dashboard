@@ -102,7 +102,7 @@ class AddUser extends Component {
                     onClose={this.closeModal}    
                 >
                     <DialogTitle className="modal-add-user-title" >
-                        <span className="modal-add-user-txt">Add User</span>
+                        <span className="modal-add-user-txt">{this.props.edituserdata ? 'EDIT USER' : 'ADD USER'}</span>
                         <Close className="modal-close-icon" onClick={this.closeModal} />
                     </DialogTitle>
                     <DialogContent  className="modal-dialog-content">
