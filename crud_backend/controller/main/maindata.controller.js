@@ -43,40 +43,42 @@ exports.modifyUser = async function(req,res,next){
         stts    : stts,
         act     : true
     }
-    
-    if(user_id){
-        var query_string = {
-            _id : user_id,
-            act : true
-        }
 
-        mongo.Model('user').updateOne( query_string, {$set : obj} ,function(err,updateddata){
-            if(err){
-                return sendError(res,"server_error","server_error");
-            }
-            return sendSuccess(res,{});
-        }) 
+    var query_string = {
+        e_mail  : e_mail,
+        act     : true
+    }
+    var option      = {};
+    var projection  = {};
+
+    var [err,user] = await to(mongo.Model('user').findOne(query_string, projection, option));
+    if(err){
+        return sendError(res,"server_error","server_error");
+    }
+    if(user){
+        return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
     }else{
-        var query_string = {
-            e_mail  : e_mail,
-            act     : true
-        }
-        var option      = {};
-        var projection  = {};
-    
-        var [err,user] = await to(mongo.Model('user').findOne(query_string, projection, option));
-        if(err){
-            return sendError(res,"server_error","server_error");
-        }
-        if(user){
-            return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
+        if(user_id){
+            var new_query_string = {
+                _id : user_id,
+                act : true
+            }
+
+            mongo.Model('user').updateOne( new_query_string, {$set : obj} ,function(err,updateddata){
+                if(err){
+                    return sendError(res,"server_error","server_error");
+                }
+                return sendSuccess(res,{});
+            }) 
         }else{
+        
             mongo.Model('user').insert(obj,function(err,saveddata){
                 if(err){
                     return sendError(res,"server_error","server_error");
                 }
                 return sendSuccess(res,{});
             }) 
+        
         }
     }
 }
