@@ -55,10 +55,11 @@ exports.modifyUser = async function(req,res,next){
     if(err){
         return sendError(res,"server_error","server_error");
     }
-    if(user){
-        return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
-    }else{
-        if(user_id){
+   
+    if(user_id){
+        if(user._id != user_id){
+            return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
+        }else{
             var new_query_string = {
                 _id : user_id,
                 act : true
@@ -70,15 +71,17 @@ exports.modifyUser = async function(req,res,next){
                 }
                 return sendSuccess(res,{});
             }) 
+        }
+    }else{
+        if(user){
+            return sendError(res,"user_already_exists","user_already_exists",constants.HTTP_STATUS.BAD_REQUEST);
         }else{
-        
             mongo.Model('user').insert(obj,function(err,saveddata){
                 if(err){
                     return sendError(res,"server_error","server_error");
                 }
                 return sendSuccess(res,{});
             }) 
-        
         }
     }
 }
