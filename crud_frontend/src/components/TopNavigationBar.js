@@ -19,7 +19,7 @@ class TopNavigationBar extends Component {
           <div className="dashboard-container hide-sm-992" >
               <div className='row no-padding no-margin'>
                 <div className="col-sm-8  no-padding no-margin">
-                    <img src={DashboardIcon} className="navigation-menu-img"></img>Dashboard
+                    <img src={DashboardIcon} className="navigation-menu-img" style={{marginLeft:0}}></img>Dashboard
                     <img src={UserIcon} className="navigation-menu-img"></img>Users
                 </div>
                 <div className="col-sm-4  no-padding no-margin navigation-align-right" >
@@ -30,7 +30,7 @@ class TopNavigationBar extends Component {
               </div>
           </div>
           <div className="dashboard-container show-sm-992 " >
-            <div className="center-all"><img className="navigation-menu-img"></img>Dashboard</div>
+            <div className="center-all"><img src={UserIcon}  className="navigation-menu-img" style={{marginLeft:0}}></img>Dashboard</div>
           </div>
         </div>
       </div>
