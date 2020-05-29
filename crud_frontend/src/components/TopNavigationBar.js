@@ -30,7 +30,7 @@ class TopNavigationBar extends Component {
               </div>
           </div>
           <div className="dashboard-container show-sm-992 " >
-            <div className="center-all"><img src={UserIcon}  className="navigation-menu-img" style={{marginLeft:0}}></img>Dashboard</div>
+            <div className="center-all"><img src={DashboardIcon}  className="navigation-menu-img" style={{marginLeft:0}}></img>Dashboard</div>
           </div>
         </div>
       </div>
