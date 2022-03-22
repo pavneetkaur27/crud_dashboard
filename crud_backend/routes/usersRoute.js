@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userManager = require("../managers/user");
+const userManager = require("../managers/userManager");
 
 router.get('/checkStatus', function (req, res, next) {
     console.log('test');
