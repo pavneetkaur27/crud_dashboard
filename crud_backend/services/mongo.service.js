@@ -165,12 +165,11 @@ Mongo.prototype.aggregation = function (q, cb) {
   }
 }
 
-Mongo.prototype.count = function ( q, cb)
-{
-  if(isFunc(cb)){
-    this.model.countDocuments( q, cb );
+Mongo.prototype.count = function (q, cb) {
+  if (isFunc(cb)) {
+    this.model.countDocuments(q, cb);
   } else {
-    return this.model.countDocuments( q );
+    return this.model.countDocuments(q);
   }
 }
 

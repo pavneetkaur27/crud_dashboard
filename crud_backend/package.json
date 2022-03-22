@@ -4,7 +4,7 @@
   "description": "crud_backend",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "deploy": "fuser -n tcp -k 4000;node --max_old_space_size=1900 --stack-size=300000 ./bin/www >> /var/log/crud_backend/express.log 2>&1 &",
     "test": "find ./test -name 'test-*.js' | xargs mocha -R spec"
   },
@@ -39,6 +39,7 @@
     "moment-timezone": "^0.5.28",
     "mongoose": "^5.5.0",
     "morgan": "^1.9.1",
+    "nodemon": "^2.0.15",
     "path": "^0.12.7",
     "redis": "^2.8.0",
     "request": "^2.88.0",

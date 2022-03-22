@@ -9,7 +9,7 @@ const sendError = (res, err, err_index, status_code) => {
 	status_code = (isUndefined(status_code) || isUndefined(Errors[err_index]))
 		? constants.HTTP_STATUS.SERVER_ERROR : status_code;
 
-	if(isUndefined(Errors[err_index])) {
+	if (isUndefined(Errors[err_index])) {
 		errCode = errorCodes["server_error"][0]
 		errMsg = errorCodes["server_error"][1];
 	} else {
@@ -24,7 +24,7 @@ const sendError = (res, err, err_index, status_code) => {
 	});
 }
 
-const sendSuccess = (res,data)=>{
+const sendSuccess = (res, data) => {
 	return res.status(constants.HTTP_STATUS.OK).send({
 		data: data,
 		success: true
