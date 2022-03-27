@@ -9,7 +9,7 @@ var statusCodes = {
     GATEWAY_TIMEOUT: 504,
     CONFLICT: 409,
     TOO_MANY_REQUESTS: 429,
-}
+};
 var errorCodes = {
     BAD_REQUEST: 'BAD_REQUEST',
     SERVICE_ERROR: 'SERVICE_ERROR',
@@ -22,7 +22,7 @@ var errorCodes = {
     SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
     TOO_MANY_REQUESTS: 'TOO_MANY_REQUESTS',
     NOT_ALLOWED_TO_JOIN_PRIVATE_SESSION: 'NOT_ALLOWED_TO_JOIN_PRIVATE_SESSION',
-}
+};
 
 var getResponseObj = function (
     success = false,
@@ -31,12 +31,12 @@ var getResponseObj = function (
     errorMessage = '',
     result = null
 ) {
-    return { success, statusCode, errorCode, errorMessage, result }
-}
+    return { success, statusCode, errorCode, errorMessage, result };
+};
 
 var getSuccessRespObj = function (result) {
-    return { result: result }
-}
+    return { result: result };
+};
 
 /**
  * Generates error response with the given params
@@ -47,29 +47,29 @@ var getSuccessRespObj = function (result) {
  */
 const getErrRespObj = function (errorCode, errMessage, extraData) {
     if (!errorCode) {
-        errorCode = 'SERVICE_ERROR'
+        errorCode = 'SERVICE_ERROR';
     }
-    var errorMessage = errMessage || errorCodesToMessagesMap[errorCode]
+    var errorMessage = errMessage || errorCodesToMessagesMap[errorCode];
     if (!errorMessage) {
-        errorMessage = ''
+        errorMessage = '';
     }
-    return { errorCode, errorMessage, extraData }
-}
+    return { errorCode, errorMessage, extraData };
+};
 
 var sendErrResp = function (res, statuscode, errorCode, errMessage) {
     if (!statuscode) {
-        statuscode = statusCodes.SERVICE_ERROR
+        statuscode = statusCodes.SERVICE_ERROR;
     }
     if (!errorCode) {
-        errorCode = 'SERVICE_ERROR'
+        errorCode = 'SERVICE_ERROR';
     }
-    var errorMessage = errMessage || errorCodesToMessagesMap[errorCode]
+    var errorMessage = errMessage || errorCodesToMessagesMap[errorCode];
     if (!errorMessage) {
-        errorMessage = ''
+        errorMessage = '';
     }
-    res.status(statuscode)
-    res.send({ errorCode: errorCode, errorMessage: errorMessage })
-}
+    res.status(statuscode);
+    res.send({ errorCode: errorCode, errorMessage: errorMessage });
+};
 
 var errorCodesToMessagesMap = {
     SERVICE_ERROR: 'Some error occured',
@@ -81,12 +81,12 @@ var errorCodesToMessagesMap = {
     MISSING_SESSION_ID: 'MISSING_SESSION_ID',
     REQ_LIM_EXC_CELEB: 'REQ_LIM_EXC_CELEB',
     SERVICE_UNAVAILABLE: 'service is unavailable',
-}
+};
 
-exports.getResponseObj = getResponseObj
-exports.getSuccessRespObj = getSuccessRespObj
-exports.getErrRespObj = getErrRespObj
-exports.sendErrResp = sendErrResp
-exports.statusCodes = statusCodes
-exports.errorCodes = errorCodes
-exports.errorCodesToMessagesMap = errorCodesToMessagesMap
+exports.getResponseObj = getResponseObj;
+exports.getSuccessRespObj = getSuccessRespObj;
+exports.getErrRespObj = getErrRespObj;
+exports.sendErrResp = sendErrResp;
+exports.statusCodes = statusCodes;
+exports.errorCodes = errorCodes;
+exports.errorCodesToMessagesMap = errorCodesToMessagesMap;

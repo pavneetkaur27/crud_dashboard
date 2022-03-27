@@ -37,6 +37,7 @@
     "fs": "0.0.1-security",
     "fs-extra": "^7.0.1",
     "helmet": "^3.16.0",
+    "ioredis": "^5.0.1",
     "ip": "^1.1.5",
     "jsonwebtoken": "^8.5.1",
     "log4js": "^4.4.0",
@@ -50,6 +51,8 @@
     "prettier": "^2.6.1",
     "redis": "^2.8.0",
     "request": "^2.88.0",
+    "socket.io": "^4.4.1",
+    "socket.io-redis": "^6.1.1",
     "winston": "^3.2.1"
   },
   "devDependencies": {

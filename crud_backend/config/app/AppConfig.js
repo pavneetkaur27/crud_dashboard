@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 exports.server = {
     SERVER_PORT: Number(process.env.PORT) || 3000,
     MODE: 'prod',
@@ -12,4 +12,4 @@ exports.server = {
     REDIS_TTL: Number(process.env.REDIS_TTL) || 260,
     ADMIN_TOKEN_PRIVATE_KEY: 'sdbchjsbvhdfv',
     JWT_PRIVATE_KEY: 'sndcvdhgf2736634rjhhbh',
-}
+};

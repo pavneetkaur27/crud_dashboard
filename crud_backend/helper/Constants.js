@@ -14,8 +14,8 @@ exports.HTTP_STATUS = {
     TOO_MANY_REQUESTS: 429,
     SERVER_BAD_REQUEST: 700,
     SERVER_ERROR_CODE: 449,
-}
+};
 
 exports.models_name = {
     category: 'category',
-}
+};
