@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
+const http = require('http');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+// const adapter = require('socket.io-redis');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const server_debug = require('debug')('Server');
@@ -30,6 +32,31 @@ const commentRoute = require('./routes/commentRoute');
 
 //connect_mongo
 config.db;
+
+const serverPort = 4000; /* from config */
+app.set('port', serverPort);
+
+/**
+ * Create HTTP server.
+ */
+var server = http.createServer(app);
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(serverPort);
+server.on('error', onError);
+server.on('listening', onListening);
+
+const io = require('socket.io')(server, {
+    pingTimeout: 7000,
+    pingInterval: 15000,
+    origins: '*:*',
+});
+
+/* initialise sockets */
+const socketioService = require('./services/socketService');
+socketioService.addIOEventHandlers(io);
+
 
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -90,5 +117,48 @@ app.use(function (err, req, res) {
         ? server_debug('Not found')
         : server_debug('Server Error');
 });
+
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+
+    var bind = typeof serverPort === 'string'
+        ? 'Pipe ' + serverPort
+        : 'Port ' + serverPort;
+
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    console.log('Server is started on ', bind);
+    server_debug('Listening on ' + bind);
+}
+
 
 module.exports = app;
