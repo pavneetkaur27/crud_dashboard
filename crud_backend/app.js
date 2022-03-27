@@ -32,6 +32,7 @@ app.use(cors());
 /*----------------------Require route-----------------------*/
 const index = require('./routes/index');
 const usersRoute = require('./routes/usersRoute');
+const commentRoute = require('./routes/commentRoute');
 /*----------------------------------------------------------*/
 
 //connect_mongo
@@ -61,6 +62,7 @@ app.use(cookieParser());
 /*---------All Routes----------*/
 app.use('/', index);
 app.use('/user', usersRoute);
+app.use('/comment', commentRoute);
 /*-----------------------------*/
 
 

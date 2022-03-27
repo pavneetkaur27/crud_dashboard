@@ -65,6 +65,7 @@ var sendErrResp = function (res, statuscode, errorCode, errMessage) {
     res.status(statuscode);
     res.send({ errorCode: errorCode, errorMessage: errorMessage });
 };
+
 var errorCodesToMessagesMap = {
     SERVICE_ERROR: "Some error occured",
     BAD_REQUEST: "missing params",
