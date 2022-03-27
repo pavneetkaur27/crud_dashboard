@@ -82,9 +82,9 @@ async function addUser(req, res) {
     }
 }
 
-async function getUser(req, res) {}
+async function getUser(req, res) { }
 
-async function removeUser(req, res) {}
+async function removeUser(req, res) { }
 
 module.exports = {
     getUser,

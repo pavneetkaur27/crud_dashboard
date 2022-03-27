@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const userManager = require('../managers/userManager');
 
-router.get('/checkStatus', function (req, res, next) {
+router.get('/checkStatus', function (req, res) {
     console.log('test');
     res.send('all good');
 });

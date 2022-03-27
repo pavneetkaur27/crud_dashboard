@@ -7,3 +7,5 @@ node_modules/*
 *_overwrite.js
 /temp
 dump
+
+*DS_Store*
