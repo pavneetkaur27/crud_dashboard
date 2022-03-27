@@ -1,7 +1,11 @@
-const { saveUser } = require('../daos/userDao');
-const enums = require('../utils/enums');
-const { getSuccessRespObj, statusCodes, errorCodes, sendErrResp } = require('../utils/responseUtils');
-
+const { saveUser } = require('../daos/userDao')
+const enums = require('../utils/enums')
+const {
+    getSuccessRespObj,
+    statusCodes,
+    errorCodes,
+    sendErrResp,
+} = require('../utils/responseUtils')
 
 /**
  * API end saves user data
@@ -9,21 +13,36 @@ const { getSuccessRespObj, statusCodes, errorCodes, sendErrResp } = require('../
  * @param { express.Response } res
  */
 async function addUser(req, res) {
-    console.log('Got req for addUser', req.body);
+    console.log('Got req for addUser', req.body)
 
-    const { username, email, status, role } = req.body;
+    const { username, email, status, role } = req.body
 
     /* todo add email validation */
     if (!email) {
-        return sendErrResp(res, statusCodes.BAD_REQUEST, errorCodes.BAD_REQUEST, 'email missing');
+        return sendErrResp(
+            res,
+            statusCodes.BAD_REQUEST,
+            errorCodes.BAD_REQUEST,
+            'email missing'
+        )
     }
 
     if (!username) {
-        return sendErrResp(res, statusCodes.BAD_REQUEST, errorCodes.BAD_REQUEST, 'username missing');
+        return sendErrResp(
+            res,
+            statusCodes.BAD_REQUEST,
+            errorCodes.BAD_REQUEST,
+            'username missing'
+        )
     }
 
     if (!role || (role && !enums.USER_ROLES[role])) {
-        return sendErrResp(res, statusCodes.BAD_REQUEST, errorCodes.BAD_REQUEST, 'role missing');
+        return sendErrResp(
+            res,
+            statusCodes.BAD_REQUEST,
+            errorCodes.BAD_REQUEST,
+            'role missing'
+        )
     }
 
     try {
@@ -33,31 +52,42 @@ async function addUser(req, res) {
             role: role,
         }
         if (status) {
-            dataToSave.stts = status;
+            dataToSave.stts = status
         }
-        const response = await saveUser(dataToSave);
+        const response = await saveUser(dataToSave)
         if (response?.result?.ok) {
-            res.send(getSuccessRespObj("done"));
+            res.send(getSuccessRespObj('done'))
         } else {
-            console.error('addUser error: ', email, username, errorCodes.SERVICE_ERROR,);
-            return sendErrResp(res, statusCodes.SERVICE_ERROR, errorCodes.SERVICE_ERROR, errorCodes.SERVICE_ERROR,);
+            console.error(
+                'addUser error: ',
+                email,
+                username,
+                errorCodes.SERVICE_ERROR
+            )
+            return sendErrResp(
+                res,
+                statusCodes.SERVICE_ERROR,
+                errorCodes.SERVICE_ERROR,
+                errorCodes.SERVICE_ERROR
+            )
         }
     } catch (err) {
-        console.error('addUser error: ', email, username, err);
-        return sendErrResp(res, statusCodes.SERVICE_ERROR, errorCodes.SERVICE_ERROR, err);
+        console.error('addUser error: ', email, username, err)
+        return sendErrResp(
+            res,
+            statusCodes.SERVICE_ERROR,
+            errorCodes.SERVICE_ERROR,
+            err
+        )
     }
 }
 
-async function getUser(req, res) {
+async function getUser(req, res) {}
 
-}
-
-async function removeUser(req, res) {
-
-}
+async function removeUser(req, res) {}
 
 module.exports = {
     getUser,
     addUser,
     removeUser,
-};
+}

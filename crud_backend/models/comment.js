@@ -1,46 +1,42 @@
-const mongoose = require('mongoose');
-const { Schema } = mongoose;
-
+const mongoose = require('mongoose')
+const { Schema } = mongoose
 
 class CommentSchema extends Schema {
     constructor(object, options) {
-        super(object, options);
+        super(object, options)
         this.add({
             postId: {
                 type: Number,
-                required: true
+                required: true,
             },
             userId: {
                 type: Number,
-                required: true
+                required: true,
             },
             comment: {
                 type: String,
-                required: true
+                required: true,
             },
-            imageUrl : {
-
-            },
+            imageUrl: {},
             parentId: {
                 type: String,
                 // validdation
             },
             lastUpdated: {
                 type: Number,
-                required: true
+                required: true,
             },
             createdAt: {
                 type: Number,
-                required: true
-            }
+                required: true,
+            },
         })
     }
 }
 
-const commentSchema = new CommentSchema();
-const CommentModel = mongoose.model('comment', commentSchema, 'comment');
-
+const commentSchema = new CommentSchema()
+const CommentModel = mongoose.model('comment', commentSchema, 'comment')
 
 module.exports = {
-    CommentModel
+    CommentModel,
 }

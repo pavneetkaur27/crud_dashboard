@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-const model_name = 'user';
+const model_name = 'user'
 
 const model_schema = new mongoose.Schema(
     {
@@ -12,21 +12,20 @@ const model_schema = new mongoose.Schema(
         act: { type: Boolean, required: true },
     },
     {
-        timestamps: true
+        timestamps: true,
     }
-);
+)
 
 model_schema.statics = {
     STATUS: {
         ACTIVE: 1,
         INACTIVE: 2,
-        PENDING: 3
+        PENDING: 3,
     },
     ROLE: {
         ADMIN: 1,
-        CUSTOMER_EXECUTIVE: 2
-    }
-};
+        CUSTOMER_EXECUTIVE: 2,
+    },
+}
 
-
-module.exports = mongoose.model(model_name, model_schema);
+module.exports = mongoose.model(model_name, model_schema)

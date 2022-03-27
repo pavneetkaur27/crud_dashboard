@@ -1,3 +1,3 @@
 module.exports = {
-    'maindata': require('./maindataManager'),
+    maindata: require('./maindataManager'),
 }

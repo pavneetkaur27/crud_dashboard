@@ -13,9 +13,9 @@ exports.HTTP_STATUS = {
     INVALID_SECRET: 611,
     TOO_MANY_REQUESTS: 429,
     SERVER_BAD_REQUEST: 700,
-    SERVER_ERROR_CODE: 449
-};
+    SERVER_ERROR_CODE: 449,
+}
 
 exports.models_name = {
-    category: 'category'
+    category: 'category',
 }

@@ -1,1 +1,1 @@
-const sConfig = require('../../config').AppConfig.server;
+const sConfig = require('../../config').AppConfig.server

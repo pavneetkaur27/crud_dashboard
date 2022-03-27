@@ -1,5 +1,5 @@
 module.exports = {
-    "Constants": require("./Constants"),
-    "Errors": require("./Errors"),
-    "HttpResponse": require("./HttpResponse")
-};
+    Constants: require('./Constants'),
+    Errors: require('./Errors'),
+    HttpResponse: require('./HttpResponse'),
+}
