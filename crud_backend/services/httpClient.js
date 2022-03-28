@@ -115,8 +115,5 @@ function createJSONResp(response, data) {
 
 module.exports = {
     get,
-    post,
-    newget,
-    newpost,
-    subscribeToSns,
+    post
 };

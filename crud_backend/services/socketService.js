@@ -3,7 +3,6 @@ var io;
 function addIOEventHandlers(_io) {
     io = _io;
 
-    console.log("testtttt");
     io.sockets.on('connection', async function (socket) {
         console.log("new connection established:" + socket.id);
 
@@ -18,4 +17,13 @@ function addIOEventHandlers(_io) {
 
 }
 
-exports.addIOEventHandlers = addIOEventHandlers;
+
+function emitToAllInClusterRoom(roomName, context, message) {
+    console.log('emitToAllInClusterRoom:', roomName, context, message);
+    io.to(roomName).emit(context, message);
+}
+
+module.exports = {
+    addIOEventHandlers,
+    emitToAllInClusterRoom
+}
