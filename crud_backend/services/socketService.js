@@ -15,6 +15,8 @@ function addIOEventHandlers(_io) {
         })
     })
 
+    /* broadcast to room  */
+    // socket.broadcast.to(roomName).emit(context, message);
 }
 
 
