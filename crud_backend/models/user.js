@@ -32,9 +32,13 @@ class UserSchema extends Schema {
                 enum: Object.keys(UserSchema.STATUS),
                 DEFAULT: UserSchema.STATUS.ACTIVE,
             },
+            password: {
+                type: String,
+                // required: true,
+            },
             role: {
                 type: String,
-                required: true,
+                // required: true,
                 enum: Object.keys(UserSchema.ROLE),
             },
             lastUpdated: {

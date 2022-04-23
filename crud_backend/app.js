@@ -22,7 +22,10 @@ app.use(helmet());
 app.use(compression());
 
 //Cors
+// app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /*----------------------Require route-----------------------*/
 const index = require('./routes/index');
@@ -82,8 +85,7 @@ app.options('*', function (req, res) {
 });
 
 app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 
 /*---------All Routes----------*/

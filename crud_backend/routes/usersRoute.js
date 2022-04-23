@@ -12,4 +12,6 @@ router.post('/add', userManager.addUser);
 
 router.post('/del', userManager.removeUser);
 
+router.post('/save', userManager.saveUser);
+
 module.exports = router;
